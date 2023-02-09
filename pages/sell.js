@@ -1,7 +1,122 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 
 export default function Sell() {
+  const [Year, setYear] = useState('');
+  const [Make, setMake] = useState('');
+  const [Model, setModel] = useState('');
+  const [Origin, setOrigin] = useState('');
+  const [City, setCity] = useState('');
+  const [Mileage, setMileage] = useState('');
+  const [EngineType, setEngineType] = useState('');
+  const [Color, setColor] = useState('');
+  const [TransmissionType, setTransmissionType] = useState('');
+  const [CarType, setCarType] = useState('');
+  const [RegisteredIn, setRegisteredIn] = useState('');
+  const [AssembledIn, setAssembledIn] = useState('');
+  const [SellerType, setSellerType] = useState('');
+  const [WhatsAppNo, setWhatsAppNo] = useState('');
+  const [Email, setEmail] = useState('');
+
+  function handleYearChange(event) {
+    setYear(event.target.value);
+  }
+  function handleMakeChange(event) {
+    setMake(event.target.value);
+  }
+  function handleModelChange(event) {
+    setModel(event.target.value);
+  }
+  function handleOriginChange(event) {
+    setOrigin(event.target.value);
+  }
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+  function handleMileageChange(event) {
+    setMileage(event.target.value);
+  }
+  function handleEngineTypeChange(event) {
+    setEngineType(event.target.value);
+  }
+  function handleColorChange(event) {
+    setColor(event.target.value);
+  }
+  function handleTransmissionTypeChange(event) {
+    setTransmissionType(event.target.value);
+  }
+  function handleCarTypeChange(event) {
+    setCarType(event.target.value);
+  }
+  function handleRegisteredInChange(event) {
+    setRegisteredIn(event.target.value);
+  }
+  function handleAssembledInChange(event) {
+    setAssembledIn(event.target.value);
+  }
+  function handleSellerTypeChange(event) {
+    setSellerType(event.target.value);
+  }
+  function handleWhatsAppNoChange(event) {
+    setWhatsAppNo(event.target.value);
+  }
+  function handleEmailChange(event) {
+    setEmail(event.target.value);
+  }
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getDate();
+    const time =
+      today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    const dateTime = date + ' ' + time;
+    const response = fetch(`/api/cars`, {
+      method: 'POST',
+      body: JSON.stringify({
+        timestamp: time,
+        date: date,
+        year: Year,
+        make: Make,
+        model: Model,
+        origin: Origin,
+        cartype: CarType,
+        mileage: Mileage,
+        color: Color,
+        enginetype: EngineType,
+        transmissiontype: TransmissionType,
+        assembly: AssembledIn,
+        registeredin: RegisteredIn,
+        sellertype: SellerType,
+        email: Email,
+        whatsappno: WhatsAppNo,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    alert('Form submitted. We will contact you shortly ;)');
+    setYear('');
+    setMake('');
+    setModel('');
+    setOrigin('');
+    setCity('');
+    setMileage('');
+    setEngineType('');
+    setColor('');
+    setTransmissionType('');
+    setCarType('');
+    setRegisteredIn('');
+    setAssembledIn('');
+    setSellerType('');
+    setWhatsAppNo('');
+    setEmail('');
+  }
+
   return (
     <div>
       <Head>
@@ -24,7 +139,11 @@ export default function Sell() {
                 type="text"
                 className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-600 focus:bg-white p-2"
                 aria-placeholder="Enter your Year"
+                placeholder="Enter your Year"
                 id="year"
+                required
+                value={Year}
+                onChange={handleYearChange}
               />
             </div>
             <div className="w-1/2 pl-1">
@@ -37,8 +156,12 @@ export default function Sell() {
               <input
                 type="text"
                 aria-placeholder="Enter your Make"
+                placeholder="Enter your Make"
                 id="make"
-                className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                required
+                className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
+                value={Make}
+                onChange={handleMakeChange}
               />
             </div>
           </div>
@@ -54,8 +177,12 @@ export default function Sell() {
                 <input
                   type="text"
                   aria-placeholder="Enter your Model"
-                  className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                  placeholder="Enter your Model"
+                  className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                   id="model"
+                  required
+                  value={Model}
+                  onChange={handleModelChange}
                 />
               </div>
             </div>
@@ -72,8 +199,12 @@ export default function Sell() {
                 <input
                   type="text"
                   aria-placeholder="Enter your Car's Origin"
-                  className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                  placeholder="Enter your Car's Origin"
+                  className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                   id="origin"
+                  required
+                  value={Origin}
+                  onChange={handleOriginChange}
                 />
               </div>
             </div>
@@ -90,8 +221,11 @@ export default function Sell() {
                 type="text"
                 aria-placeholder="Enter city "
                 placeholder="Enter city "
-                className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                 id="city"
+                required
+                value={City}
+                onChange={handleCityChange}
               />
             </div>
             <div className="w-1/2 pl-1">
@@ -105,8 +239,11 @@ export default function Sell() {
                 type="number"
                 aria-placeholder="Enter mileage"
                 placeholder="Enter mileage"
-                className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                 id="mileage"
+                required
+                value={Mileage}
+                onChange={handleMileageChange}
               />
             </div>
           </div>
@@ -120,8 +257,11 @@ export default function Sell() {
               </label>
               <div className="relative">
                 <select
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                   id="enginetype"
+                  required
+                  value={EngineType}
+                  onChange={handleEngineTypeChange}
                 >
                   <option default>----- Select Engine type-----</option>
                   <option value="petrol">Petrol</option>
@@ -133,26 +273,25 @@ export default function Sell() {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap p-3">
+          <div className="flex flex-row justify-between p-3">
             <div className="w-full">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 xs:mt-3 "
-                htmlFor="color"
-              >
-                Color
-              </label>
-              <div className="relative">
-                <select
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
-                  id="color"
+              <div>
+                <label
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 xs:mt-3"
+                  htmlFor="color"
                 >
-                  <option default>----- Select Color of your car-----</option>
-                  <option value="white">White</option>
-                  <option value="silver">Silver</option>
-                  <option value="black">Black</option>
-                  <option value="gray">Gray</option>
-                  <option value="blue">Blue</option>
-                </select>
+                  Color
+                </label>
+                <input
+                  type="text"
+                  aria-placeholder="Enter your Car's Color"
+                  placeholder="Enter your Car's Color"
+                  className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
+                  id="color"
+                  required
+                  value={Color}
+                  onChange={handleColorChange}
+                />
               </div>
             </div>
           </div>
@@ -165,7 +304,12 @@ export default function Sell() {
                 Transmission Type
               </label>
               <div className="relative">
-                <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500">
+                <select
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
+                  required
+                  value={TransmissionType}
+                  onChange={handleTransmissionTypeChange}
+                >
                   <option default>----- Select Transmission type-----</option>
                   <option value="manual">Manual</option>
                   <option value="automatic">Automatic</option>
@@ -184,8 +328,11 @@ export default function Sell() {
               </label>
               <div className="relative">
                 <select
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                   id="cartype"
+                  required
+                  value={CarType}
+                  onChange={handleCarTypeChange}
                 >
                   <option default>----- Select Car type-----</option>
                   <option value="owner">SUV/Crossover</option>
@@ -213,8 +360,11 @@ export default function Sell() {
               </label>
               <div className="relative">
                 <select
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                   id="registeredin"
+                  required
+                  value={RegisteredIn}
+                  onChange={handleRegisteredInChange}
                 >
                   <option default>----- Select Registered City-----</option>
                   <option value="dubai">Dubai</option>
@@ -225,22 +375,27 @@ export default function Sell() {
               </div>
             </div>
           </div>
-          <div className="flex flex-row justify-between p-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 xs:mt-3"
-              htmlFor="assembly"
-            >
-              Assembly
-            </label>
-            <div className="relative">
-              <select
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
-                id="registeredin"
+          <div className="flex flex-wrap p-3">
+            <div className="w-full">
+              <label
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 xs:mt-3 "
+                htmlFor="assesmbledin"
               >
-                <option default>----- Select Assembly Origin-----</option>
-                <option value="local">Local</option>
-                <option value="imported">Imported</option>
-              </select>
+                Assembled In
+              </label>
+              <div className="relative">
+                <select
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
+                  id="assembly"
+                  required
+                  value={AssembledIn}
+                  onChange={handleAssembledInChange}
+                >
+                  <option default>----- Select Assembled In-----</option>
+                  <option value="local">Local</option>
+                  <option value="export">Exported</option>
+                </select>
+              </div>
             </div>
           </div>
           <div className="flex flex-wrap p-3">
@@ -253,8 +408,11 @@ export default function Sell() {
               </label>
               <div className="relative">
                 <select
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500"
+                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
                   id="sellertype"
+                  required
+                  value={SellerType}
+                  onChange={handleSellerTypeChange}
                 >
                   <option default>----- Select Seller type-----</option>
                   <option value="owner">Owner</option>
@@ -266,11 +424,56 @@ export default function Sell() {
               </div>
             </div>
           </div>
+          <div className="flex flex-row justify-between p-3">
+            <div className="w-full">
+              <div>
+                <label
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 xs:mt-3"
+                  htmlFor="color"
+                >
+                  WhatsApp no
+                </label>
+                <input
+                  type="text"
+                  aria-placeholder="Enter your Whatsapp No"
+                  placeholder="Enter your Whatsapp No"
+                  className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
+                  id="color"
+                  required
+                  value={WhatsAppNo}
+                  onChange={handleWhatsAppNoChange}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row justify-between p-3">
+            <div className="w-full">
+              <div>
+                <label
+                  className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 xs:mt-3"
+                  htmlFor="color"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  aria-placeholder="Enter your Email"
+                  placeholder="Enter your Email"
+                  className="w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:border-gray-500 focus:bg-white"
+                  id="email"
+                  required
+                  value={Email}
+                  onChange={handleEmailChange}
+                />
+              </div>
+            </div>
+          </div>
           <div className="flex flex-wrap p-3">
             <div className="w-full px-3 mb-6 xs:mb-0 mt-2">
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full xs:text-xs"
+                onChange={handleSubmit}
               >
                 Submit
               </button>
